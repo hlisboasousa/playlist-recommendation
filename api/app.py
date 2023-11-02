@@ -7,7 +7,6 @@ from flask_cors import CORS
 app = Flask(__name__)
 CORS(app)
 # Load recommendation model using pickle
-
 with open('../itemsets.pickle', 'rb') as handle:
     frequent_itemsets = pickle.load(handle)
 
@@ -33,11 +32,7 @@ def generate_recommendations():
             recommended_playlists.extend(playlists['pid'].tolist())
 
         # Send playlist IDs as response
-        response_data = {
-            'playlist_ids': list(recommended_playlists),
-            'version': '1.0',
-            'model_date': '2023-11-02'
-        }
+        response_data = create_response(recommended_playlists)
         return jsonify(response_data)
     
     except Exception as e:
@@ -57,13 +52,17 @@ def get_playlists_by_track():
         filtered_playlists = ds1[ds1['track_name'] == track_name]['pid'].tolist()
 
         # Send playlist IDs as response
-        response_data = {
-            'playlist_ids': filtered_playlists,
-            'version': '1.0',
-            'model_date': '2023-11-02'
-        }
+        response_data = create_response(filtered_playlists)
         return jsonify(response_data)
     
     except Exception as e:
         logging.error("Error: %s", str(e))
         return jsonify({'error': str(e)})
+
+def create_response(playlist_ids):
+    response_data = {
+        'playlist_ids': playlist_ids,
+        'version': '1.0',
+        'model_date': '2023-11-02'
+    }
+    return jsonify(response_data)
