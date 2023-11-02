@@ -32,8 +32,7 @@ def generate_recommendations():
             recommended_playlists.extend(playlists['pid'].tolist())
 
         # Send playlist IDs as response
-        response_data = create_response(recommended_playlists)
-        return jsonify(response_data)
+        return create_response(recommended_playlists)
     
     except Exception as e:
         logging.error("Error: %s", str(e))
@@ -52,8 +51,7 @@ def get_playlists_by_track():
         filtered_playlists = ds1[ds1['track_name'] == track_name]['pid'].tolist()
 
         # Send playlist IDs as response
-        response_data = create_response(filtered_playlists)
-        return jsonify(response_data)
+        return  create_response(filtered_playlists)
     
     except Exception as e:
         logging.error("Error: %s", str(e))
