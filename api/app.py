@@ -2,9 +2,10 @@ import logging
 from flask import Flask, request, jsonify
 import pandas as pd
 import pickle
+from flask_cors import CORS
 
 app = Flask(__name__)
-
+CORS(app)
 # Load recommendation model using pickle
 
 with open('../itemsets.pickle', 'rb') as handle:
@@ -14,7 +15,7 @@ with open('../itemsets.pickle', 'rb') as handle:
 def generate_recommendations():
     try:
         data = request.get_json(force=True)
-        songs = data['songs']
+        songs = data['tracks']
 
         playlists1_path = '../data/playlist-sample-ds1.csv'
         ds1 = pd.read_csv(playlists1_path)
@@ -35,7 +36,31 @@ def generate_recommendations():
         response_data = {
             'playlist_ids': list(recommended_playlists),
             'version': '1.0',
-            'model_date': '2023-10-29'
+            'model_date': '2023-11-02'
+        }
+        return jsonify(response_data)
+    
+    except Exception as e:
+        logging.error("Error: %s", str(e))
+        return jsonify({'error': str(e)})
+    
+@app.route('/api/get-playlists-by-song', methods=['POST'])
+def get_playlists_by_track():
+    try:
+        data = request.get_json(force=True)
+        track_name = data['song']
+
+        playlists1_path = '../data/playlist-sample-ds1.csv'
+        ds1 = pd.read_csv(playlists1_path)
+
+        # Filter playlists that contain the given track
+        filtered_playlists = ds1[ds1['track_name'] == track_name]['pid'].tolist()
+
+        # Send playlist IDs as response
+        response_data = {
+            'playlist_ids': filtered_playlists,
+            'version': '1.0',
+            'model_date': '2023-11-02'
         }
         return jsonify(response_data)
     

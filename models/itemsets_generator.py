@@ -10,7 +10,6 @@ ds1 = pd.read_csv(playlists1_path)
 # Preprocessar os dados para o Apriori
 grouped_data = ds1.groupby('pid')['track_name'].apply(list).reset_index(name='tracks_list')
 
-
 # Transforme a lista de faixas em um formato adequado para o algoritmo
 te = TransactionEncoder()
 te_ary = te.fit(grouped_data['tracks_list']).transform(grouped_data['tracks_list'])
