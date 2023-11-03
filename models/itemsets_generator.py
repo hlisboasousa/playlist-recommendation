@@ -17,7 +17,6 @@ df = pd.DataFrame(te_ary, columns=te.columns_)
 
 # Aplique o algoritmo de Conjunto de Itens Frequentes (neste exemplo, suporte mínimo é 0.1)
 frequent_itemsets = apriori(df, min_support=0.01, use_colnames=True)
-print(frequent_itemsets)
 
 # Salvar as regras geradas usando pickle
 with open('itemsets.pickle', 'wb') as handle:

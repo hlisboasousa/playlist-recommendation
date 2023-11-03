@@ -1,0 +1,42 @@
+name: CI/CD Pipeline
+on:
+  push:
+    branches:
+      - main
+jobs:
+  unittest:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v2
+
+    - name: Set up Python environment with Poetry
+      run: |
+        curl -sSL https://install.python-poetry.org | python3 -
+        export PATH=$PATH:$HOME/.poetry/bin
+        poetry config virtualenvs.create false
+      shell: bash
+
+    - name: Install backend dependencies with Poetry
+      run: poetry install --no-root
+      working-directory: path/to/your/project
+
+    - name: Run backend tests
+      run: poetry run python -m unittest discover -s tests -p '*_test.py'
+      working-directory: path/to/your/project
+
+  jest:
+    runs-on: ubuntu-latest
+    
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v2
+
+    - name: Set up Node.js
+      uses: actions/setup-node@v2
+      with:
+        node-version: 14
+
+    - name: Run frontend tests
+      run: npm test
