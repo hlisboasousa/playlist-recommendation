@@ -7,7 +7,7 @@ from flask_cors import CORS
 app = Flask(__name__)
 CORS(app)
 # Load recommendation model using pickle
-with open('../itemsets.pickle', 'rb') as handle:
+with open('./itemsets.pickle', 'rb') as handle:
     frequent_itemsets = pickle.load(handle)
 
 @app.route('/api/recommend', methods=['POST'])
@@ -16,7 +16,7 @@ def generate_recommendations():
         data = request.get_json(force=True)
         songs = data['tracks']
 
-        playlists1_path = '../data/playlist-sample-ds1.csv'
+        playlists1_path = './data/playlist-sample-ds1.csv'
         ds1 = pd.read_csv(playlists1_path)
 
         # Preprocessar os dados para o Apriori
@@ -44,7 +44,7 @@ def get_playlists_by_track():
         data = request.get_json(force=True)
         track_name = data['song']
 
-        playlists1_path = '../data/playlist-sample-ds1.csv'
+        playlists1_path = './data/playlist-sample-ds1.csv'
         ds1 = pd.read_csv(playlists1_path)
 
         # Filter playlists that contain the given track

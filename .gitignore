@@ -1,2 +1,4 @@
 itemsets.pickle
-venv
+poetry.lock
+__pycache__
+api/__pycache__
