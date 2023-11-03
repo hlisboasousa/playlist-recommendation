@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Playlist Recommender</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+    <div class="container">
+        <h1>Playlist Recommender</h1>
+        <label for="trackInput">Enter track names:</label>
+        <input type="text" id="trackInput">
+        <button onclick="clearTrackList()" class="clear-btn">Clear List</button>
+        <button onclick="addTrack()" class="add-btn">Add Track</button>
+        <ul id="trackList"></ul>
+        <button onclick="submitRequest()" class="submit-btn">Submit</button>
+        <div id="result"></div>
+    </div>
+    <div class="search-container">
+        <label for="songSearchInput">Search Playlists by Song:</label>
+        <input type="text" id="songSearchInput">
+        <button onclick="searchPlaylistsBySong()">Search</button>
+        <div id="songSearchResult"></div>
+    </div>
+    
+
+    <script src="script.js"></script>
+</body>
+
+</html>
