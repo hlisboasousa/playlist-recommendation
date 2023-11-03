@@ -41,14 +41,14 @@ function submitRequest() {
     })
     .then(response => response.json())
     .then(data => {
-        displayPlaylistIds(data.playlist_ids, "result");
+        displayRecommendedPlaylistIds(data.playlist_ids, "result");
     })
     .catch(error => {
         console.error("Error:", error);
     });
 }
 
-function displayPlaylistIds(playlistIds, resource) {
+function displayRecommendedPlaylistIds(playlistIds, resource) {
     const resultDiv = document.getElementById(resource);
     resultDiv.innerHTML = "<h2>Recommended Playlist IDs</h2>";
     const list = document.createElement("ul");
