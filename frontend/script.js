@@ -1,3 +1,5 @@
+const API_URL = "http://localhost:5000/api";
+
 let trackList = [];
 
 function addTrack() {
@@ -30,7 +32,7 @@ function submitRequest() {
         return;
     }
 
-    fetch(`localhost:5000/api/api/recommend`, {
+    fetch(`${API_URL}/api/recommend`, {
         method: "POST",
         headers: {
             "Content-Type": "application/json"
@@ -64,7 +66,7 @@ function displayPlaylistIds(playlistIds, resource) {
 function searchPlaylistsBySong() {
     const songSearchInput = document.getElementById("songSearchInput").value;
 
-    fetch(`localhost:5000/api/get-playlists-by-song`, {
+    fetch(`${API_URL}/get-playlists-by-song`, {
         method: "POST",
         headers: {
             "Content-Type": "application/json"
