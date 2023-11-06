@@ -32,8 +32,8 @@ We will use a (small) sample of a Spotify dataset. The dataset sample is availab
     You can first train your model using playlists-sample-ds1.csv and later update the model using playlists-sample-ds2.csv.
 
 ## How to run: Backend
-    python3 models/itemsets_generator.py
     poetry install
+    poetry run python3 models/itemsets_generator.py
     poetry run flask --app api/app.py run
 
 ## How to run: Frontend
