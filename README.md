@@ -19,6 +19,7 @@ Backend:
     Poetry,
     Unittest,
     Pandas
+    Mlxtend - Apriori
 
 ## Dataset
 
