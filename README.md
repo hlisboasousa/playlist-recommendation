@@ -1,14 +1,5 @@
 ## Henrique Lisboa de Sousa
 
-## How to run: Backend
-    python3 models/itemsets_generator.py
-    poetry install
-    poetry run flask --app api/app.py run
-
-## How to run: Frontend
-    cd frontend
-    python3 -m http.server 8000 
-
 ## General Goal
 
 In this project, we will design, implement and deploy a playlist recommendation service built on microservices, combining a Web front end and a machine learning module. The service will be built and tested using continuous integration, and automatically deployed using continuous delivery. The practice of integrating a machine learning workflow with DevOps has been referred to as MLOps.
@@ -38,3 +29,12 @@ We will use a (small) sample of a Spotify dataset. The dataset sample is availab
     The songs.csv file contains songs in the playlists that can be used in the recommendation step.
 
     You can first train your model using playlists-sample-ds1.csv and later update the model using playlists-sample-ds2.csv.
+
+## How to run: Backend
+    python3 models/itemsets_generator.py
+    poetry install
+    poetry run flask --app api/app.py run
+
+## How to run: Frontend
+    cd frontend
+    python3 -m http.server 8000 
