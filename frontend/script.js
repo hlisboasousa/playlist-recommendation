@@ -32,7 +32,7 @@ function submitRequest() {
         return;
     }
 
-    fetch(`${API_URL}/api/recommend`, {
+    fetch(`${API_URL}/recommend`, {
         method: "POST",
         headers: {
             "Content-Type": "application/json"
