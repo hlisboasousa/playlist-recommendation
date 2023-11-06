@@ -1,13 +1,13 @@
 ## Henrique Lisboa de Sousa
 
 ## How to run: Backend
-    > python3 models/itemsets_generator.py
-    > poetry install
-    > poetry run flask --app api/app.py run
+    python3 models/itemsets_generator.py
+    poetry install
+    poetry run flask --app api/app.py run
 
 ## How to run: Frontend
-    > cd frontend
-    > python3 -m http.server 8000 
+    cd frontend
+    python3 -m http.server 8000 
 
 ## General Goal
 
@@ -20,13 +20,13 @@ We will create a recommendation system to recommend playlists to a user based on
 ## Tecnologies
 
 Frontend:
-    HTML, CSS, JS
+    HTML, CSS, JS,
     Jest
 
-Backend>
-    Flask
-    Poetry
-    Unittest
+Backend:
+    Flask,
+    Poetry,
+    Unittest,
     Pandas
 
 ## Dataset
