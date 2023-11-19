@@ -1,14 +1,23 @@
 import logging
 from flask import Flask, request, jsonify
-import pandas as pd
 import pickle
+import pandas as pd
 from flask_cors import CORS
-
 app = Flask(__name__)
 CORS(app)
+
+ds1 = pd.read_csv("./data/playlist-sample-ds1.csv")
+ds2 = pd.read_csv("./data/2023_spotify_ds2.csv")
+ds3 = pd.read_csv("./data/2023_spotify_ds1.csv")
+ds = pd.concat([ds1, ds2, ds3])
+
 # Load recommendation model using pickle
 with open('./itemsets.pickle', 'rb') as handle:
     frequent_itemsets = pickle.load(handle)
+
+@app.route('/', methods=['GET'])
+def health_check():
+    return "Server running ok!"
 
 @app.route('/api/recommend', methods=['POST'])
 def generate_recommendations():
@@ -16,15 +25,11 @@ def generate_recommendations():
         data = request.get_json(force=True)
         songs = data['tracks']
 
-        playlists1_path = './data/playlist-sample-ds1.csv'
-        ds1 = pd.read_csv(playlists1_path)
-
         # Preprocessar os dados para o Apriori
-        grouped_data = ds1.groupby('pid')['track_name'].apply(list).reset_index(name='tracks_list')
+        grouped_data = ds.groupby('pid')['track_name'].apply(list).reset_index(name='tracks_list')
 
         # Filtra os conjuntos frequentes que contêm pelo menos uma faixa de entrada
         filtered_itemsets = frequent_itemsets[frequent_itemsets['itemsets'].apply(lambda x: any(track in x for track in songs))]
-
         # Agrupa as playlists que contêm esses conjuntos frequentes
         recommended_playlists = []
         for index, row in filtered_itemsets.iterrows():
@@ -44,11 +49,8 @@ def get_playlists_by_track():
         data = request.get_json(force=True)
         track_name = data['song']
 
-        playlists1_path = './data/playlist-sample-ds1.csv'
-        ds1 = pd.read_csv(playlists1_path)
-
         # Filter playlists that contain the given track
-        filtered_playlists = ds1[ds1['track_name'] == track_name]['pid'].tolist()
+        filtered_playlists = ds[ds['track_name'] == track_name]['pid'].tolist()
 
         # Send playlist IDs as response
         return  create_response(filtered_playlists)
