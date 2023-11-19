@@ -24,9 +24,9 @@ jobs:
         docker buildx create --use
         docker buildx inspect --bootstrap
 
-        docker buildx build -t hlisboa/playlist-recommendation-api:latest -f api.dockerfile --push .
-        docker buildx build -t hlisboa/playlist-recommendation-model:latest -f model.dockerfile --push .
-        docker buildx build -t hlisboa/playlist-recommendation-frontend:latest -f frontend.dockerfile --push .
+        docker buildx build -t hlisboa/playlist-recommendation-api:latest -f dockerfiles/api.dockerfile --push .
+        docker buildx build -t hlisboa/playlist-recommendation-model:latest -f dockerfiles/model.dockerfile --push .
+        docker buildx build -t hlisboa/playlist-recommendation-frontend:latest -f dockerfiles/frontend.dockerfile --push .
 
   # unittest:
   #   runs-on: ubuntu-latest

@@ -1,5 +1,5 @@
 [tool.poetry]
-name = "project-name"
+name = "playlist-recommendation"
 version = "1.0"
 description = ""
 authors = ["Henrique Lisboa <hlisboasousa@gmail.com>"]
