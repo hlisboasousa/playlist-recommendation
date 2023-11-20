@@ -3,7 +3,7 @@ import requests
 API_URL = 'http://localhost:32158/api/recommend'
 
 def get_recommendations(songs):
-    response = requests.post(API_URL, json={'tracks': songs})
+    response = requests.post(API_URL, json={'songs': songs})
     if response.status_code == 200:
         data = response.json()
         print('Received Recommendations:', data)

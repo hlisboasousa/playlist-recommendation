@@ -37,7 +37,7 @@ function submitRequest() {
         headers: {
             "Content-Type": "application/json"
         },
-        body: JSON.stringify({ tracks: trackList })
+        body: JSON.stringify({ songs: trackList })
     })
     .then(response => response.json())
     .then(data => {

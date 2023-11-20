@@ -3,15 +3,11 @@ from flask import Flask, request, jsonify
 import pickle
 import pandas as pd
 from flask_cors import CORS
-import os
 app = Flask(__name__)
 CORS(app)
 
-home_directory = os.path.expanduser("~")
-dataset_path1 = os.path.join(home_directory, "datasets/2023_spotify_ds1.csv")
-dataset_path2 = os.path.join(home_directory, "datasets/2023_spotify_ds2.csv")
-ds1 = pd.read_csv(dataset_path1)
-ds2 = pd.read_csv(dataset_path2)
+ds1 = pd.read_csv("./datasets/2023_spotify_ds1.csv")
+ds2 = pd.read_csv("./datasets/2023_spotify_ds2.csv")
 ds = pd.concat([ds1, ds2])
 
 # Load recommendation model using pickle
@@ -26,7 +22,7 @@ def health_check():
 def generate_recommendations():
     try:
         data = request.get_json(force=True)
-        songs = data['tracks']
+        songs = data['songs']
 
         # Preprocessar os dados para o Apriori
         grouped_data = ds.groupby('pid')['track_name'].apply(list).reset_index(name='tracks_list')

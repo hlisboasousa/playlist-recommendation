@@ -1,14 +1,10 @@
 import pickle
 import pandas as pd
-import os
 from mlxtend.frequent_patterns import apriori
 from mlxtend.preprocessing import TransactionEncoder
 
-home_directory = os.path.expanduser("~")
-dataset_path1 = os.path.join(home_directory, "datasets/2023_spotify_ds1.csv")
-dataset_path2 = os.path.join(home_directory, "datasets/2023_spotify_ds2.csv")
-ds1 = pd.read_csv(dataset_path1)
-ds2 = pd.read_csv(dataset_path2)
+ds1 = pd.read_csv("./datasets/2023_spotify_ds1.csv")
+ds2 = pd.read_csv("./datasets/2023_spotify_ds2.csv")
 ds = pd.concat([ds1, ds2])
 
 # Preprocessar os dados para o Apriori

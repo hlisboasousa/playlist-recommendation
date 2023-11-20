@@ -12,7 +12,7 @@ RUN pip install poetry
 RUN pip install flask
 
 # Install project dependencies
-RUN poetry config virtualenvs.create false && poetry install --no-dev
+RUN poetry config virtualenvs.create false && poetry install --no-dev --no-root
 
 # Copy the necessary files into the container
 COPY api/ /app/api
