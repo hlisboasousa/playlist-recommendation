@@ -22,6 +22,9 @@ def health_check():
 def generate_recommendations():
     try:
         data = request.get_json(force=True)
+        if 'songs' not in data:
+            return jsonify({'error': 'Missing required key: songs'}), 400
+        
         songs = data['songs']
 
         # Preprocessar os dados para o Apriori
@@ -46,6 +49,9 @@ def generate_recommendations():
 def get_playlists_by_track():
     try:
         data = request.get_json(force=True)
+        
+        if 'song' not in data:
+            return jsonify({'error': 'Missing required key: songs'}), 400
         track_name = data['song']
 
         # Filter playlists that contain the given track

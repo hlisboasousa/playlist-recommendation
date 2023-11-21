@@ -16,7 +16,7 @@ RUN poetry config virtualenvs.create false && poetry install --no-dev --no-root
 
 # Copy the necessary files into the container
 COPY api/ /app/api
-COPY data/ /app/data
+COPY datasets/ /app/datasets
 
 EXPOSE 32185
 
