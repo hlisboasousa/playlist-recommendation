@@ -1,0 +1,24 @@
+{
+  "name": "playlist-recommendation",
+  "version": "1.0.0",
+  "description": "In this project, we will design, implement and deploy a playlist recommendation service built on microservices, combining a Web front end and a machine learning module. The service will be built and tested using continuous integration, and automatically deployed using continuous delivery. The practice of integrating a machine learning workflow with DevOps has been referred to as MLOps.",
+  "main": "frontend/script.js",
+  "directories": {
+    "test": "tests"
+  },
+  "scripts": {
+    "test": "jest"
+  },
+  "jest": {
+    "testEnvironment": "jsdom"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "jest": "^29.7.0",
+    "jest-fetch-mock": "^3.0.3",
+    "jsdom": "^22.1.0",
+    "jest-environment-jsdom": "^29.7.0",
+    "testing-library": "^0.0.2"
+  }
+}

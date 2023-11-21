@@ -96,3 +96,13 @@ function displayPlaylistsBySong(playlistIds, resource) {
 
     songSearchResultDiv.appendChild(list);
 }
+
+module.exports = {
+    addTrack,
+    clearTrackList,
+    renderTrackList,
+    submitRequest,
+    displayRecommendedPlaylistIds,
+    searchPlaylistsBySong,
+    displayPlaylistsBySong
+};
