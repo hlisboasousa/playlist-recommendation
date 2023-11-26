@@ -17,6 +17,7 @@ RUN poetry config virtualenvs.create false && poetry install --no-dev --no-root
 # Copy the necessary files into the container
 COPY api/ /app/api
 COPY datasets/ /app/datasets
+COPY itemsets.pickle /app/itemsets.pickle
 
 EXPOSE 32185
 

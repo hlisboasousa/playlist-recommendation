@@ -16,6 +16,7 @@ RUN poetry config virtualenvs.create false && poetry install --no-dev --no-root
 # Copy the necessary files into the container
 COPY models /app/models
 COPY datasets /app/datasets
+COPY itemsets.pickle /app/itemsets.pickle
 
 # Run ml_container_script.py when the container launches
 CMD ["poetry", "run", "python3", "models/itemsets_generator.py"]
