@@ -1,7 +1,7 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: playlist-recommender-deployment
+  name: playlist-recommender-model
 spec:
   replicas: 2
   selector:
@@ -12,33 +12,54 @@ spec:
       labels:
         app: playlist-recommender
     spec:
+      volumes:
+        - name: shared-storage
+          persistentVolumeClaim:
+            claimName: project2-pvc-henriquesousa
       containers:
       - name: model
         image: hlisboa/playlist-recommendation-model:latest
         imagePullPolicy: Always
+        
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: playlist-recommender-api
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: playlist-recommender
+  template:
+    metadata:
+      labels:
+        app: playlist-recommender
+    spec:
+      volumes:
+        - name: shared-storage
+          persistentVolumeClaim:
+            claimName: project2-pvc-henriquesousa
+      
+      containers:
       - name: api
         imagePullPolicy: Always
         image: hlisboa/playlist-recommendation-api:latest
         ports:
         - containerPort: 32185
+---
 
-      - name: frontend
-        image: hlisboa/playlist-recommendation-frontend:latest
-        imagePullPolicy: Always
-        ports:
-        - containerPort: 8000
-# ---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: project2-pvc-henriquesousa
+spec:
+  accessModes:
+    - ReadWriteMany
+  storageClassName: standard
+  resources:
+    requests:
+      storage: 1Gi
+  volumeName: project2-pv-henriquesousa
+---
 
-# apiVersion: v1
-# kind: PersistentVolumeClaim
-# metadata:
-#  name: project2-pvc-henriquesousa
-# spec:
-#  accessModes:
-#    - ReadWriteMany
-#  storageClassName: standard
-#  resources:
-#    requests:
-#      storage: 1Gi
-#  volumeName: project2-pv-henriquesousa
-# ---

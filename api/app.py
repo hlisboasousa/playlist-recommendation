@@ -11,7 +11,7 @@ ds2 = pd.read_csv("./datasets/2023_spotify_ds2.csv")
 ds = pd.concat([ds1, ds2])
 
 # Load recommendation model using pickle
-with open('./itemsets.pickle', 'rb') as handle:
+with open('../itemsets.pickle', 'rb') as handle:
     frequent_itemsets = pickle.load(handle)
 
 @app.route('/', methods=['GET'])
