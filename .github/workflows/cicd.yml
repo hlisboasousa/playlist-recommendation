@@ -73,12 +73,19 @@ jobs:
       with:
         python-version: 3.12
         poetry-version: 1.2.2
+    - name: Install Codecov
+      uses: codecov/codecov-action@v2
 
     - name: Generate Itemsets
       run: poetry run python models/itemsets_generator.py
     - name: Run Python unittests
       run: |
         poetry run python -m unittest discover ./tests/unittests "*_test.py"
+        poetry run coverage xml
+    - name: Upload Coverage to Codecov
+      uses: codecov/codecov-action@v2
+      with:
+        file: coverage.xml
     
   run-jest:
     runs-on: ubuntu-latest
