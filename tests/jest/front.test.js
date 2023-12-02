@@ -1,11 +1,9 @@
 const {
-  addTrack,
-  clearTrackList,
   renderTrackList,
   submitRequest,
   displayRecommendedPlaylistIds,
   searchPlaylistsBySong,
-  displayPlaylistsBySong,
+  searchSongsByPlaylist,
 } = require('../../frontend/script');
 
 const fetchMock = require('jest-fetch-mock');
@@ -17,6 +15,19 @@ describe('Your Script File Tests', () => {
   beforeEach(() => {
     // Reset the trackList before each test
     trackList = [];
+  });
+
+  test('submitRequest should display an alert if trackList is empty', () => {
+    global.alert = jest.fn();
+    submitRequest();
+    expect(alert).toHaveBeenCalledWith('Please add tracks before submitting.');
+  });
+
+  test('displayRecommendedPlaylistIds should render playlist IDs to the result div', () => {
+    document.getElementById = jest.fn(() => ({ innerHTML: '', appendChild: jest.fn() }));
+    const playlistIds = [1, 2, 3];
+    displayRecommendedPlaylistIds(playlistIds, 'result');
+    expect(document.getElementById).toHaveBeenCalledWith('result');
   });
 
   test('renderTrackList should render tracks to the list', () => {
@@ -34,6 +45,13 @@ describe('Your Script File Tests', () => {
     // Mocking the DOM elements
     document.getElementById = jest.fn(() => ({ innerHTML: '', appendChild: jest.fn() }));
     await searchPlaylistsBySong();
+    expect(fetch).toHaveBeenCalled();
+  });
+
+  test('searchSongsByPlaylist should make a fetch call and display songs by playlist', async () => {
+    document.getElementById = jest.fn(() => ({ value: '1' }));
+    document.getElementById = jest.fn(() => ({ innerHTML: '', appendChild: jest.fn() }));
+    await searchSongsByPlaylist();
     expect(fetch).toHaveBeenCalled();
   });
 });

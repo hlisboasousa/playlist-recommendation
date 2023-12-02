@@ -10,21 +10,38 @@
 
 <body>
     <div class="container">
-        <h1>Playlist Recommender</h1>
-        <label for="trackInput">Enter track names:</label>
-        <input type="text" id="trackInput">
-        <button onclick="clearTrackList()" class="clear-btn">Clear List</button>
-        <button onclick="addTrack()" class="add-btn">Add Track</button>
-        <ul id="trackList"></ul>
-        <button onclick="submitRequest()" class="submit-btn">Submit</button>
-        <div id="result"></div>
+        
+        <!-- Add Track Section -->
+        <div class="section">
+            <h1>Playlist Recommender</h1>
+            <label for="trackInput">Enter track names:</label>
+            <input type="text" id="trackInput">
+            <button onclick="clearTrackList()" class="clear-btn">Clear List</button>
+            <button onclick="addTrack()" class="add-btn">Add Track</button>
+            <ul id="trackList"></ul>
+            <button onclick="submitRequest()" class="submit-btn">Submit</button>
+            <div id="result"></div>
+        </div>
+
+        <!-- Search Playlists by Song Section -->
+        <div class="section">
+            <h2>Get Playlists by Song</h2>
+            <label for="songSearchInput">Search Playlists by Song:</label>
+            <input type="text" id="songSearchInput">
+            <button onclick="searchPlaylistsBySong()">Search</button>
+            <div id="songSearchResult" class="playlist-list"></div>
+        </div>
+
+        <!-- Get Songs by Playlist Section -->
+        <div class="section">
+            <h2>Get Songs by Playlist</h2>
+            <label for="playlistIdInput">Enter Playlist ID:</label>
+            <input type="text" id="playlistIdInput">
+            <button onclick="searchSongsByPlaylist()">Get Songs</button>
+            <div id="songsByPlaylistResult" class="playlist-list"></div>
+        </div>
     </div>
-    <div class="search-container">
-        <label for="songSearchInput">Search Playlists by Song:</label>
-        <input type="text" id="songSearchInput">
-        <button onclick="searchPlaylistsBySong()">Search</button>
-        <div id="songSearchResult"></div>
-    </div>
+
     <script src="script.js"></script>
 </body>
 

@@ -4,7 +4,7 @@ body {
 }
 
 .container {
-    max-width: 400px;
+    max-width: 800px; /* Adjust as needed */
     margin: 0 auto;
     text-align: center;
     padding: 20px;
@@ -12,6 +12,28 @@ body {
     border-radius: 5px;
     margin-top: 50px;
     background-color: white;
+    display: flex;
+    /* flex-wrap: wrap; */
+    justify-content: space-around;
+}
+
+.section {
+    width: calc(33.33% - 20px);
+    margin-bottom: 20px;
+}
+
+/* Adjustments for mobile responsiveness */
+@media (max-width: 768px) {
+    .container {
+        flex-direction: row;
+    }
+
+    .section {
+        width: 100%;
+    }
+}
+.container div {
+    margin-bottom: 20px;
 }
 
 input {
