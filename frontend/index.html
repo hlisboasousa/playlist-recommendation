@@ -28,7 +28,7 @@
             <h2>Get Playlists by Song</h2>
             <label for="songSearchInput">Search Playlists by Song:</label>
             <input type="text" id="songSearchInput">
-            <button onclick="searchPlaylistsBySong()">Search</button>
+            <button onclick="searchPlaylistsBySong()" class="playlist-by-song-btn">Search</button>
             <div id="songSearchResult" class="playlist-list"></div>
         </div>
 
@@ -37,7 +37,7 @@
             <h2>Get Songs by Playlist</h2>
             <label for="playlistIdInput">Enter Playlist ID:</label>
             <input type="text" id="playlistIdInput">
-            <button onclick="searchSongsByPlaylist()">Get Songs</button>
+            <button onclick="searchSongsByPlaylist()" class="songs-by-playlist-btn">Get Songs</button>
             <div id="songsByPlaylistResult" class="playlist-list"></div>
         </div>
     </div>

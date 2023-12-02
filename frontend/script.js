@@ -136,14 +136,16 @@ function displaySongsByPlaylist(songNames, resource) {
     songsByPlaylistResultDiv.appendChild(list);
 }
 
-module.exports = {
-    addTrack,
-    clearTrackList,
-    renderTrackList,
-    submitRequest,
-    displayRecommendedPlaylistIds,
-    searchPlaylistsBySong,
-    displayPlaylistsBySong,
-    searchSongsByPlaylist,
-    displaySongsByPlaylist
-};
+if (typeof module !== 'undefined' && module.exports) {
+    module.exports = {
+        addTrack,
+        clearTrackList,
+        renderTrackList,
+        submitRequest,
+        displayRecommendedPlaylistIds,
+        searchPlaylistsBySong,
+        displayPlaylistsBySong,
+        searchSongsByPlaylist,
+        displaySongsByPlaylist
+    };
+}

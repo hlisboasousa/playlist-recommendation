@@ -56,7 +56,7 @@ def get_playlists_by_song():
         
         if 'song' not in data:
             return jsonify({'error': 'Missing required key: song'}), 400
-        track_name = data['song'].lower()
+        track_name = data['song']
 
         # Filter playlists that contain the given track
         filtered_playlists = ds[ds['track_name'] == track_name]['pid'].tolist()
