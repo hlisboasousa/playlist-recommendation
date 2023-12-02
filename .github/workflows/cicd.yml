@@ -79,7 +79,7 @@ jobs:
       run: |
         poetry run python -m unittest discover ./tests/unittests "*_test.py" --v
 
-  run-jest:
+  jest:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout code
@@ -104,10 +104,31 @@ jobs:
 
       - name: Run tests
         run: cd tests/jest && npm test
+    
+  cypress:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Cache Cypress binary
+        uses: actions/cache@v2
+        with:
+          path: |
+            ~/.cache/Cypress
+          key: ${{ runner.os }}-cypress-${{ hashFiles('**/package-lock.json') }}
+          restore-keys: |
+            ${{ runner.os }}-cypress-
+
+      - name: Install Cypress
+        run: npm install cypress
+
+      - name: Run Cypress tests
+        run: npm run test:cypress
 
   publish-images:
     runs-on: ubuntu-latest
-    needs: [run-unittests-ubuntu,run-unittests-windows,run-unittests-mac, run-jest]
+    needs: [run-unittests-ubuntu,run-unittests-windows,run-unittests-mac, jest, cypress]
     steps:
     - name: Checkout code
       uses: actions/checkout@v3
