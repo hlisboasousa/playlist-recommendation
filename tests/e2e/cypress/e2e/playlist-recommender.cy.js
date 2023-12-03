@@ -21,20 +21,19 @@ describe('Playlist Recommender', () => {
       cy.get('.add-btn').click();
       cy.get('.submit-btn').click();
       cy.get('#result').should('be.visible');
-      // Add assertions based on your expected behavior.
     });
   
     it('should search playlists by song', () => {
       cy.get('#songSearchInput').type('Smells Like Teen Spirit');
       cy.get('.playlist-by-song-btn').click();
       cy.get('#songSearchResult').should('be.visible');
-      // Add assertions based on your expected behavior.
+      cy.contains('#songSearchResult', '4050').should('exist');
     });
   
     it('should get songs by playlist', () => {
       cy.get('#playlistIdInput').type('4050');
       cy.get('.songs-by-playlist-btn').click();
       cy.get('#songsByPlaylistResult').should('be.visible');
-      // Add assertions based on your expected behavior.
+      cy.contains('#songsByPlaylistResult', 'Smells Like Teen Spirit').should('exist');
     });
   });
