@@ -1,36 +1,59 @@
-## Henrique Lisboa de Sousa
+## Henrique Lisboa de Sousa - 2019436765
 
-## General Goal
 
-In this project, we will design, implement and deploy a playlist recommendation service built on microservices, combining a Web front end and a machine learning module. The service will be built and tested using continuous integration, and automatically deployed using continuous delivery. The practice of integrating a machine learning workflow with DevOps has been referred to as MLOps.
+## Overview
 
-We will obtain experience using some of the most popular tools in this context: Docker to containerize application components, Kubernetes to orchestrate the deployment in a cloud environment, GitHub as a central code repository, and ArgoCD as the continuous delivery framework on top of Kubernetes.
+The Playlist Recommendation App is a web application designed to generate playlist recommendations based on user-provided track inputs. It utilizes a recommendation model built using the Apriori algorithm, and it offers features to search for playlists containing a specific song and retrieve songs from a given playlist.
 
-We will create a recommendation system to recommend playlists to a user based on a set of songs that the user listened in the past.
+## Functionality
 
-## Tecnologies
+The application provides the following main features:
 
-Frontend:
-    HTML, CSS, JS,
-    Jest
+1. **Generate Playlist Recommendations**
+   - Users can input a list of track names.
+   - The app analyzes playlists containing those tracks using the Apriori algorithm.
+   - It returns a list of recommended playlist IDs.
 
-Backend:
-    Flask,
-    Poetry,
-    Unittest,
-    Pandas
-    Mlxtend - Apriori
+2. **Search Playlists by Song**
+   - Users can search for playlists that contain a specific song.
+   - The app returns a list of playlist IDs containing the requested song.
 
-## Dataset
+3. **Get Songs by Playlist**
+   - Users can retrieve a list of songs from a specified playlist.
+   - The app returns a list of song names in the requested playlist.
 
-We will use a (small) sample of a Spotify dataset. The dataset sample is available on the cluster at /home/datasets/spotify-sample (in the VM's root file system, not HDFS). It includes two parts:
+## Technologies Used
 
-    The playlists-sample-ds1.csv and playlists-sample-ds2.csv datasets contain 500 playlists each. The two datasets represent the set of playlists in the platform and can be used to emulate an update to the model.
+The Playlist Recommendation App is built using the following technologies:
 
-    The songs.csv file contains songs in the playlists that can be used in the recommendation step.
+- **Backend:**
+  - Flask (Python web framework)
+  - Pandas (Data manipulation library)
+  - Apriori Algorithm for recommendation modeling
+  - Docker for containerization
 
-    You can first train your model using playlists-sample-ds1.csv and later update the model using playlists-sample-ds2.csv.
+- **Frontend:**
+  - HTML, CSS
+  - JavaScript
 
+- **Testing:**
+  - Jest for JavaScript unit testing
+  - Unittest for Python unit testing
+  - Cypress for end-to-end testing
+
+- **CI/CD:**
+  - GitHub Actions for continuous integration and deployment
+  - Docker for containerized deployment
+  - 
+- **Infra:**
+  - The app is being served by an EC2 instance in AWS.
+  - Access link: http://35.153.157.24:8000/
+## Getting Started
+
+1. **Clone the Repository:**
+   ```bash
+   git clone https://github.com/your-username/playlist-recommendation.git
+   cd playlist-recommendation
 ## How to run: Backend
     poetry install
     poetry run python3 models/itemsets_generator.py
