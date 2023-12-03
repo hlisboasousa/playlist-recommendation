@@ -1,4 +1,5 @@
-## Henrique Lisboa de Sousa - 2019436765
+## Playlist recommendation with Machine Learning and DevOps infra
+Henrique Lisboa de Sousa - 2019436765
 
 
 ## Overview
