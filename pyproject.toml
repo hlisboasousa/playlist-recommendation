@@ -12,6 +12,7 @@ pandas = "^2.0.3"
 flask-cors = "^3.0.10"
 mlxtend = "0.18.0"
 coverage = "^7.3.2"
+lizard = "^1.17.10"
 
 [build-system]
 requires = ["poetry-core"]

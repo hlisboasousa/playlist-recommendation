@@ -4,8 +4,39 @@ on:
     branches:
       - main
 jobs:
+  lizzard-analysis:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v3
+
+    - name: "Setup Python, Poetry and Dependencies"
+      uses: packetcoders/action-setup-cache-python-poetry@main
+      with:
+        python-version: 3.12
+        poetry-version: 1.2.2
+
+    - name: Run Lizzard Analysis
+      run: poetry run lizard api -T cyclomatic_complexity=7
+
+  generate-itemsets:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v3
+
+    - name: "Setup Python, Poetry and Dependencies"
+      uses: packetcoders/action-setup-cache-python-poetry@main
+      with:
+        python-version: 3.12
+        poetry-version: 1.2.2
+
+    - name: Generate Itemsets
+      run: poetry run python models/itemsets_generator.py
+
   unittests-windows:
     runs-on: windows-latest
+    needs: [generate-itemsets]
     steps:
 
     - name: Checkout code
@@ -32,18 +63,14 @@ jobs:
       run: poetry install
       shell: cmd
 
-    - name: Generate Itemsets
-      run: poetry run python models/itemsets_generator.py
-      shell: cmd
-
     - name: Run Python unittests
       run: poetry run python -m unittest discover ./tests/unittests "*_test.py" --v
       shell: cmd
 
   unittests-mac:
     runs-on: macos-latest
+    needs: [generate-itemsets]
     steps:
-
     - name: Checkout code
       uses: actions/checkout@v3
 
@@ -53,18 +80,14 @@ jobs:
         python-version: 3.12
         poetry-version: 1.2.2
 
-    - name: Generate Itemsets
-      run: poetry run python models/itemsets_generator.py
-      shell: bash
-
     - name: Run Python unittests
       run: poetry run python -m unittest discover ./tests/unittests "*_test.py" --v
       shell: bash
     
   unittests-ubuntu:
     runs-on: ubuntu-latest
+    needs: [generate-itemsets]
     steps:
-
     - name: Checkout code
       uses: actions/checkout@v3
 
@@ -73,9 +96,6 @@ jobs:
       with:
         python-version: 3.12
         poetry-version: 1.2.2
-
-    - name: Generate Itemsets
-      run: poetry run python models/itemsets_generator.py
     
     - name: Run Python unittests
       run: |
@@ -89,6 +109,7 @@ jobs:
         CODECOV_TOKEN: ${{ secrets.CODECOV_TOKEN }}
   jest:
     runs-on: ubuntu-latest
+    needs: [generate-itemsets]
     steps:
       - name: Checkout code
         uses: actions/checkout@v3
@@ -115,6 +136,7 @@ jobs:
     
   cypress:
     runs-on: ubuntu-latest
+    needs: [unittests-ubuntu,unittests-windows,unittests-mac,jest]
     steps:
       - name: Checkout code
         uses: actions/checkout@v3
@@ -136,7 +158,7 @@ jobs:
 
   publish-images:
     runs-on: ubuntu-latest
-    needs: [unittests-ubuntu,unittests-windows,unittests-mac, jest, cypress]
+    needs: [cypress]
     steps:
     - name: Checkout code
       uses: actions/checkout@v3
