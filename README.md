@@ -45,7 +45,8 @@ The Playlist Recommendation App is built using the following technologies:
 - **CI/CD:**
   - GitHub Actions for continuous integration and deployment
   - Docker for containerized deployment
-  - 
+  - Lizzard code analysis
+
 - **Infra:**
   - The app is being served by an EC2 instance in AWS.
   - Access link: http://35.153.157.24:8000/
