@@ -1,6 +1,6 @@
 describe('Playlist Recommender', () => {
     beforeEach(() => {
-      cy.visit('http://localhost:8000');
+      cy.visit('http://35.153.157.24:8000');
     });
   
     it('should add a track to the track list', () => {

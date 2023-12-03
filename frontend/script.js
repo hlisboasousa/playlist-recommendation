@@ -1,4 +1,4 @@
-const API_URL = "http://localhost:32185/api";
+const API_URL = "http://35.153.157.24:32185/api";
 
 let trackList = [];
 

@@ -103,7 +103,7 @@ jobs:
           node-version: '18'
 
       - name: Run tests
-        run: cd tests/jest && npm test
+        run: cd tests/jest && npm run test:jest
     
   cypress:
     runs-on: ubuntu-latest
